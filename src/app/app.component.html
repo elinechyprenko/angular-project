@@ -1,0 +1,95 @@
+<div *ngIf="navbarChanges()">
+  <nav class="navbar__second navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar__block-second collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar__list-second navbar-nav">
+          <li class="navbar__item-second nav-item">
+            <a routerLink="/home" class="navbar__link-second nav-link active" aria-current="page">Home</a>
+          </li>
+          <li class="navbar__item-second nav-item">
+            <a routerLink="/menu" class="navbar__link-second nav-link">Eat & Drink</a>
+          </li>
+          <li class="navbar__dropdown-second nav-item dropdown">
+            <a class="navbar-dropdown__title-second nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Reservation
+            </a>
+            <ul class="navbar-dropdown__list-second dropdown-menu">
+              <li class="navbar-dropdown__item-second"><a class="navbar-dropdown__link-second dropdown-item"
+                  routerLink="/group_dining">Group dining</a></li>
+              <li class="navbar-dropdown__item-second"><a class="navbar-dropdown__link-second dropdown-item"
+                  routerLink="/reservation">Make a reservation</a></li>
+            </ul>
+          </li>
+          <a routerLink="/home" class="restaurant__name-second navbar-brand">Tasty Nook</a>
+          <li *ngIf="authService.isLoggedIn" class="navbar__item-second nav-item">
+            <a routerLink="/cart" class="navbar__link-second nav-link">Cart</a>
+          </li>
+          <li class="navbar__item-second nav-item">
+            <a routerLink="/contact_us" class="navbar__link-second nav-link">Contact us</a>
+          </li>
+          <li *ngIf="!authService.isLoggedIn" class="navbar__item-second nav-item">
+            <a routerLink="/sign_up" class="navbar__link-second nav-link">Sign up</a>
+          </li>
+          <li *ngIf="authService.isLoggedIn" class="navbar__item-second nav-item">
+            <a class="navbar__link-second nav-link" data-bs-toggle="offcanvas" href="#offcanvasAccount" role="button"
+              aria-controls="offcanvasAccount">
+              My account
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<app-account></app-account>
+<router-outlet></router-outlet>
+
+<div class="footer__container container-fluid text-left">
+  <div class="footer__row row">
+    <div class="footer__col footer__col-first col-6">
+      <h3 class="footer-contact__title">Contact us</h3>
+      <div class="footer__block">
+        <div class="footer-geo__block">
+          <i class="icon fa-solid fa-location-dot"></i>
+          <div class="footer-contact__info">
+            <span class="footer-geo footer-contact__brand">Tasty Nook</span>
+            <span class="footer-geo footer-contact__address">Grzybowska 2, 00-131</span>
+            <span class="footer-geo footer-contact__country">Poland, Warsaw</span>
+          </div>
+        </div>
+        <div class="footer-contact__connect">
+          <div class="footer-contact__block">
+            <i class="icon fa-solid fa-phone"></i>
+            <div class="footer-contact__phones">
+              <span class="footer-contact__phone">730-558-408</span>
+              <span class="footer-contact__phone">412-567-890</span>
+            </div>
+          </div>
+          <div class="footer-mail__block">
+            <i class="icon fa-solid fa-envelope"></i>
+            <div class="footer__mail">
+              <span class="footer-contact__mail">tastynook91gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__col footer__col-second col-6">
+      <h3 class="footer-hour__title">Business Hour</h3>
+      <div class="footer-hour__block">
+        <i class="icon fa-regular fa-calendar"></i>
+        <div class="footer__hour">
+          <span class="footer-hour">Monday-Thursday: 8:00 - 00:00</span>
+          <span class="footer-hour">Friday-Saturday: 8:00 - 02:00</span>
+          <span class="footer-hour">Sunday: 9:00 - 00:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

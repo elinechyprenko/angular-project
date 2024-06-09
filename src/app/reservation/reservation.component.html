@@ -1,0 +1,42 @@
+<div class="page-background">
+  <div class="reservation">
+    <div class="reservation-block container">
+      <div class="booking-top" *ngIf="currentStep === 'booking'">
+        <i class="gg-check-o"></i>
+        <div>
+          <span class="booking__title">Your table has been confirmed!</span>
+          <span class="booking__title">You can change the data if you need to</span>
+        </div>
+      </div>
+      <div *ngIf="currentStep !== 'booking'" class="reservation-top">
+        <h2 class="reservation__title">Reservation at Tasty Nook</h2>
+        <a *ngIf="!authService.isLoggedIn" class="reservation__register" routerLink="/login">Sign in</a>
+      </div>
+      <div *ngIf="currentStep !== 'booking'" class="reservation__steps">
+        <span class="reservation__step" (click)="selectTab('find-table')"
+          [class.active]="currentStep === 'find-table'">1. Find a table </span>
+        <span class="reservation__step" (click)="selectTab('your-details')"
+          [class.active]="currentStep === 'your-details'">2. Your details</span>
+        <div class="reservation__underline"></div>
+        <div class="reservation__underline-active"
+          [ngClass]="{'find-table': currentStep === 'find-table', 'your-details': currentStep === 'your-details'}">
+        </div>
+      </div>
+      <div *ngIf="currentStep === 'find-table'">
+        <app-find-table (tableFound)="onFoundTable($event)"></app-find-table>
+      </div>
+      <div *ngIf="currentStep === 'your-details'">
+        <app-reservation-details (bookingDetails)="reservationConfirmation($event)" *ngIf="selectedTable"
+          [table_id]="selectedTable.table_id" [date]="selectedTable.date" [time]="selectedTable.time"
+          [people]="selectedTable.people"></app-reservation-details>
+      </div>
+      <div *ngIf="currentStep === 'booking'">
+        <app-booking *ngIf="booking" [table_id]="booking.table_id" [fullName]="booking.fullName" [email]="booking.email"
+          [phone]="booking.phone" [date]="booking.date" [people]="booking.people" [time]="booking.time"
+          (onCancel)="onReservationCancelled()"></app-booking>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template></ng-template>
+<router-outlet></router-outlet>

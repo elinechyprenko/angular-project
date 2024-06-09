@@ -1,0 +1,16 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@font-face {
+    font-family: 'Segoe Print';
+    src: url('/src/assets/fonts/Segoe-Print-Font.ttf') format('truetype');
+}
+
+html,
+body {
+    font-family: 'Roboto', Roboto-serif;
+    font-size: 16px;
+    color: black;
+}
+a {
+    text-decoration: none;
+    color: black
+}

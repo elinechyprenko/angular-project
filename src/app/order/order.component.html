@@ -1,0 +1,289 @@
+<div class="page-background" *ngIf="selectedMethod==='on-site-ordering'">
+    <div class="container">
+        <div class="row">
+            <div class="back-col col">
+                <div class="back-container">
+                    <a routerLink="/cart" class="back">
+                        <a class="back-arrow-left"></a>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="order-col col-6">
+                <h2 class="order__title">Your Contact Information</h2>
+                <form [formGroup]="siteForm">
+                    <div class="form-group mb-3">
+                        <label for="fullname" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" formControlName="fullName">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="phone" class="form-label">Mobile Phone</label>
+                        <input type="tel" class="form-control" id="phone" formControlName="phone">
+                    </div>
+                </form>
+            </div>
+            <div class="order-col col-6">
+                <h2 class="order__title">Your Order</h2>
+                <div class="order-product">
+                    <strong class="product__title">Product</strong>
+                    <div class="product-info" *ngFor="let item of cartItem">
+                        <span class="product__description">{{item.product.title}} <span class="product__quantity">x
+                                {{item.quantityProduct}}</span></span>
+                        <span>{{item.price}} zl</span>
+                    </div>
+                    <div class="order-subtotal">
+                        <strong class="subtotal__title">Subtotal</strong>
+                        <span class="subtotal__price">{{subtotal}} zl</span>
+                    </div>
+                    <div class="order-payment">
+                        <strong class="payment__title">Payment</strong>
+                        <div class="payment-options">
+                            <button (click)="totalPrice()" [ngClass]="{'selected': selectedPaymentOption === '100%'}"
+                                class="payment__option">100%</button>
+                            <button (click)="halfPrice()" [ngClass]="{'selected': selectedPaymentOption === '50%'}"
+                                class="payment__option">50%</button>
+                        </div>
+                    </div>
+                    <div class="order-total" *ngIf="totalBlock">
+                        <strong class="total__title">Total</strong>
+                        <strong class="total__price">{{total}} zl</strong>
+                    </div>
+                </div>
+                <div *ngIf="selectedPaymentOption==='50%' || selectedPaymentOption==='100%'" id="card-element"></div>
+                <div class="order-btn__block">
+                    <button class="order__btn" *ngIf="selectedPaymentOption === '50%' || selectedPaymentOption==='100%'"
+                        (click)="submitOrder()">PAY</button>
+                </div>
+
+                <div *ngIf="orderFinish" class="modal-background">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Order Received!</h3>
+                        </div>
+                        <hr>
+                        <div class="modal-body">
+                            <span class="modal__info">You can see the order confirmation in your personal
+                                ACCOUNT.</span>
+                            <span class="modal__info">Thank you for your interest in Tasty Nook! </span>
+                        </div>
+                        <hr>
+                        <div class="modal-footer">
+                            <button type="button" class="btn modal__btn" routerLink="/home">Back To Home</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-background" *ngIf="selectedMethod === 'delivery'">
+    <div class="container">
+        <div class="row">
+            <div class="back-col col">
+                <div class="back-container">
+                    <a routerLink="/cart" class="back">
+                        <a class="back-arrow-left"></a>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="order-col col-6">
+                <h2 class="order__title">Your Contact Information</h2>
+                <form [formGroup]="deliveryForm">
+                    <div class="form-group mb-3">
+                        <label for="fullname" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" formControlName="fullName">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="phone" class="form-label">Mobile Phone</label>
+                        <input type="tel" class="form-control" id="phone" formControlName="phone">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="address" class="form-label">Street Address</label>
+                        <input type="text" class="form-control" id="address" formControlName="address">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="postcode" class="form-label">Postcode</label>
+                        <input type="text" class="form-control" id="postcode" formControlName="postcode">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" formControlName="date" [min]="minDate"
+                            [max]="maxDate">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="time" class="form-label">Time</label>
+                        <input type="time" class="form-control" id="time" formControlName="time">
+                    </div>
+                </form>
+            </div>
+            <div class="order-col col-6">
+                <h2 class="order__title">Your Order</h2>
+                <div class="order-product">
+                    <strong class="product__title">Product</strong>
+                    <div class="product-info" *ngFor="let item of cartItem">
+                        <span class="product__description">{{item.product.title}} <span class="product__quantity">x
+                                {{item.quantityProduct}}</span></span>
+                        <span>{{item.price}} zl</span>
+                    </div>
+                    <div class="order-subtotal">
+                        <strong class="subtotal__title">Subtotal</strong>
+                        <span class="subtotal__price">{{subtotal}} zl</span>
+                    </div>
+                    <div class="order-delivery">
+                        <strong class="delivery__title">Delivery</strong>
+                        <span class="delivery__price">{{deliveryPrice}} zl</span>
+                    </div>
+                    <div class="order-payment">
+                        <strong class="payment__title">Payment</strong>
+                        <div class="payment-options">
+                            <button (click)="totalPrice()" [ngClass]="{'selected': selectedPaymentOption === '100%'}"
+                                class="payment__option">100%</button>
+                            <button (click)="cash()" [ngClass]="{'selected': selectedPaymentOption === 'cash'}"
+                                class="payment__option">Cash</button>
+                        </div>
+                    </div>
+                    <div class="order-total" *ngIf="totalBlock">
+                        <strong class="total__title">Total</strong>
+                        <strong class="total__price">{{total}} zl</strong>
+                    </div>
+                </div>
+                <div class="order-btn__block" *ngIf="selectedPaymentOption==='cash'">
+                    <button class="order__btn" (click)="submitOrder()">Order</button>
+                </div>
+                <div *ngIf="selectedPaymentOption==='50%' || selectedPaymentOption==='100%'" id="card-element"></div>
+                <div class="order-btn__block">
+                    <button class="order__btn" *ngIf="selectedPaymentOption === '50%' || selectedPaymentOption==='100%'"
+                        (click)="submitOrder()">PAY</button>
+                </div>
+
+                <div *ngIf="orderFinish" class="modal-background">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Order Received!</h3>
+                        </div>
+                        <hr>
+                        <div class="modal-body">
+                            <span class="modal__info">You can see the order confirmation in your personal
+                                ACCOUNT.</span>
+                            <span class="modal__info">Thank you for your interest in Tasty Nook! </span>
+                        </div>
+                        <hr>
+                        <div class="modal-footer">
+                            <button type="button" class="btn modal__btn" routerLink="/home">Back To Home</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-background" *ngIf="selectedMethod==='takeaway'">
+    <div class="container">
+        <div class="row">
+            <div class="back-col col">
+                <div class="back-container">
+                    <a routerLink="/cart" class="back">
+                        <a class="back-arrow-left"></a>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="order-col col-6">
+                <h2 class="order__title">Your Contact Information</h2>
+                <form [formGroup]="takeawayForm">
+                    <div class="form-group mb-3">
+                        <label for="fullname" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" formControlName="fullName">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="phone" class="form-label">Mobile Phone</label>
+                        <input type="tel" class="form-control" id="phone" formControlName="phone">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" formControlName="date" [min]="minDate"
+                            [max]="maxDate">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="time" class="form-label">Time</label>
+                        <input type="time" class="form-control" id="time" formControlName="time">
+                    </div>
+                </form>
+            </div>
+            <div class="order-col col-6">
+                <h2 class="order__title">Your Order</h2>
+                <div class="order-product">
+                    <strong class="product__title">Product</strong>
+                    <div class="product-info" *ngFor="let item of cartItem">
+                        <span class="product__description">{{item.product.title}} <span class="product__quantity">x
+                                {{item.quantityProduct}}</span></span>
+                        <span>{{item.price}} zl</span>
+                    </div>
+                    <div class="order-subtotal">
+                        <strong class="subtotal__title">Subtotal</strong>
+                        <span class="subtotal__price">{{subtotal}} zl</span>
+                    </div>
+                    <div class="order-packing">
+                        <strong class="packing__title">Packing</strong>
+                        <span class="packing__price">{{packingPrice}} zl</span>
+                    </div>
+                    <div class="order-payment">
+                        <strong class="payment__title">Payment</strong>
+                        <div class="payment-options">
+                            <button (click)="halfPrice()" [ngClass]="{'selected': selectedPaymentOption === '50%'}"
+                                class="payment__option">50%</button>
+                            <button (click)="cash()" [ngClass]="{'selected': selectedPaymentOption === 'cash'}"
+                                class="payment__option">Cash</button>
+                        </div>
+                    </div>
+                    <div class="order-total" *ngIf="totalBlock">
+                        <strong class="total__title">Total</strong>
+                        <strong class="total__price">{{total}} zl</strong>
+                    </div>
+                </div>
+                <div class="order-btn__block" *ngIf="selectedPaymentOption==='cash'">
+                    <button class="order__btn" (click)="submitOrder()">Order</button>
+                </div>
+                <div *ngIf="selectedPaymentOption==='50%' || selectedPaymentOption==='100%'" id="card-element"></div>
+                <div class="order-btn__block">
+                    <button class="order__btn" *ngIf="selectedPaymentOption === '50%' || selectedPaymentOption==='100%'"
+                        (click)="submitOrder()">PAY</button>
+                </div>
+
+                <div *ngIf="orderFinish" class="modal-background">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Order Received!</h3>
+                        </div>
+                        <hr>
+                        <div class="modal-body">
+                            <span class="modal__info">You can see the order confirmation in your personal
+                                ACCOUNT.</span>
+                            <span class="modal__info">Thank you for your interest in Tasty Nook! </span>
+                        </div>
+                        <hr>
+                        <div class="modal-footer">
+                            <button type="button" class="btn modal__btn" routerLink="/home">Back To Home</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

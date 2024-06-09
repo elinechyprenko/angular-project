@@ -1,0 +1,109 @@
+<div class="page-background">
+  <h2 class="page-title">Eat & Drink</h2>
+  <hr class="title-line" />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3 nav-block">
+        <div>
+          <nav #fixedSideBar [ngStyle]="{'bottom': fixedSideBarBottom}" class="nav flex-column nav-list">
+            <div *ngFor="let category of data; let i = index">
+              <div class="nav-title__block">
+                <span class="nav__title"><a class="nav__link"
+                    (click)="scrollToCategory(category.category_title, i)">{{category.category_title }}</a></span>
+                <span class="nav__quantity"><a class="nav__link" href="">{{category.productCount}}</a></span>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="menu col-9">
+        <div *ngFor="let category of data; let i = index">
+          <div class="dish__category-title" [attr.id]="'category_' + i">
+            {{ category.category_title }}
+          </div>
+          <div class="row menu__row">
+            <div *ngFor="let product of category.products" class="col-6 menu-list">
+              <div class="menu__info">
+                <span class="menu__title">{{ product.title }}</span>
+                <span class="menu__description">{{ product.description }}</span>
+                <span class="menu__price">{{ product.price }} zl</span>
+              </div>
+              <div class="image__block">
+                <i class="gg-add-r" (click)="open(product)"></i>
+                <img *ngIf="imageUrl !== null && imageUrl.length > 0"
+                  [src]="'http://localhost:3000/images/' + product.image" alt="img" class="menu__image" />
+              </div>
+
+              <div *ngIf="isClicked" class="modal-background">
+                <div class="modal-content">
+                  <i class="gg-close-r" (click)="close()"></i>
+                  <div class="modal-header">
+                    <h2 class="modal__title">{{ selectedProduct.title }}</h2>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-image__block">
+                      <img *ngIf="imageUrl !== null && imageUrl.length > 0" [src]="
+                          'http://localhost:3000/images/' +
+                          selectedProduct.image
+                        " alt="img" class="modal-menu__image" />
+                    </div>
+                    <hr />
+                    <div class="modal-info__block">
+                      <span class="modal__info">{{
+                        selectedProduct.info
+                        }}</span>
+                    </div>
+                    <hr />
+                    <div class="modal-additions__block">
+                      <h4 class="modal-additions__title">Additions</h4>
+                      <div class="modal__additions" *ngFor="
+                          let addition of selectAdditions(selectedProduct)
+                        ">
+                        <div class="additions-title__block">
+                          <i class="add-additions" (click)="addAddition(addition)"></i>
+                          <div class="additions__quantity" *ngIf="addition.quantityAddition >= 1">
+                            <span>{{ addition.quantityAddition }}</span>
+                            <i class="remove-additions" (click)="removeAdditions(addition)"></i>
+                          </div>
+                          <span class="modal-additions__description">{{
+                            addition.addition_title
+                            }}</span>
+                        </div>
+                        <span class="modal-additions__price">+ {{ addition.addition_price }} zl</span>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="quanity-product__block">
+                      <i class="remove-product" (click)="removeProduct(selectedProduct)"></i>
+                      <span class="quantity_title">{{ quantity }}</span>
+                      <i class="add-product" (click)="addProduct(selectedProduct)"></i>
+                      <div class="btn-block">
+                        <button class="add-to-cart" (click)="addToCart(selectedProduct)">
+                          Add to cart +{{ allPrice }} zl
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="postData" class="modal-background" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-info">
+                    <div class="modal-block">
+                      <p class="modal__description">Added to cart</p>
+                    </div>
+                    <div class="modal-footer">
+                      <a routerLink="/cart" class="btn btn__cart">Go to cart</a>
+                      <a (click)="backToMenu()" routerLink="/menu" class="btn btn__menu">View menu</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

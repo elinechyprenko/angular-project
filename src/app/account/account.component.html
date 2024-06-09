@@ -1,0 +1,195 @@
+<div *ngIf="authService.isLoggedIn" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAccount"
+  aria-labelledby="offcanvasAccountLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasAccountLabel">Profile</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr>
+  <div class="offcanvas-body">
+    <div class="info-row row">
+      <div class="offcanvas-block col-3">
+        <div class="info-col">
+          <div class="user-block">
+            <img class="user__img" src="../../assets/picture/user icon.png" alt="user">
+          </div>
+          <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <li class="nav-item" role="presentation" hidden>
+              <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile"
+                role="tab" aria-controls="v-pills-profile" aria-selected="true">My profile</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <i class="gg-calendar"></i>
+              <a class="nav-link" id="v-pills-reservation-tab" data-bs-toggle="pill" href="#v-pills-reservation"
+                role="tab" aria-controls="v-pills-reservation" aria-selected="false">Reservation</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <i class="gg-time"></i>
+              <a class="nav-link" id="v-pills-history-tab" data-bs-toggle="pill" href="#v-pills-history" role="tab"
+                aria-controls="v-pills-history" aria-selected="false">Order History</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <i class="gg-user"></i>
+              <a class="nav-link" id="v-pills-info-tab" data-bs-toggle="pill" href="#v-pills-info" role="tab"
+                aria-controls="v-pills-info" aria-selected="false">My Info</a>
+            </li>
+          </ul>
+          <div class="sign-block">
+            <button class="sign__out" (click)="signOut()">Sign out</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 info-col">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
+            aria-labelledby="v-pills-profile-tab">
+            <h3 class="info__title">My Profile</h3>
+            <form>
+              <div class="mb-3">
+                <label for="fullname" class="form-label floating-label">Fullname</label>
+                <input type="text" class="form-control" id="fullname" [value]="userData.fullname" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label floating-label">Email</label>
+                <input type="email" class="form-control" id="email" [value]="userData.email" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label floating-label">Phone</label>
+                <input type="text" class="form-control" id="phone" [value]="userData.phone" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="birthday" class="form-label floating-label">Birthday</label>
+                <input type="date" class="form-control" id="birthday" [value]="userData.birthday | date: 'dd-MM-yyyy'"
+                  readonly>
+              </div>
+              <div class="mb-3">
+                <label for="currentPassword" class="form-label floating-label">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword" [(ngModel)]="currentPassword"
+                  name="currentPassword">
+              </div>
+              <div class="mb-3">
+                <label for="newPassword" class="form-label floating-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword"
+                  name="newPassword">
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label floating-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword"
+                  name="confirmPassword" [ngClass]="{'password-mismatch': !checkPasswordsMatch()}">
+              </div>
+              <div class="btn-block">
+                <button type="button" class="btn btn__save" (click)="saveData()">Save</button>
+                <button type="button" class="btn btn__cancel" (click)="cancel()">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="v-pills-reservation" role="tabpanel" aria-labelledby="v-pills-reservation-tab">
+            <h3 class="info__title">Reservation</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">People</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">FullName</th>
+                  <th scope="col">Phone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let reservation of reservationTables; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{reservation.date | date: 'dd-MM-yyyy'}}</td>
+                  <td>{{reservation.number_of_seats}}</td>
+                  <td>{{reservation.time}}</td>
+                  <td>{{reservation.email}}</td>
+                  <td>{{reservation.full_name}}</td>
+                  <td>{{reservation.phone}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngFor="let order of orderData" class="tab-pane fade" id="v-pills-history" role="tabpanel"
+            aria-labelledby="v-pills-history-tab">
+            <h3 class="info__title">Order History</h3>
+            <div class="container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Order Method</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Postcode</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Selected Payment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of orderData; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{data.order_method}}</td>
+                    <td>{{data.full_name}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.address}}</td>
+                    <td>{{data.postcode}}</td>
+                    <td>{{order.date | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{data.time}}</td>
+                    <td>{{data.total_price}} zl</td>
+                    <td>{{data.selected_payment}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="v-pills-info" role="tabpanel" aria-labelledby="v-pills-info-tab">
+            <h3 class="info__title">My Info</h3>
+            <form>
+              <div class="mb-3">
+                <label for="fullname" class="form-label floating-label">Fullname</label>
+                <input type="text" class="form-control" id="fullname" [value]="userData.fullname" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label floating-label">Email</label>
+                <input type="email" class="form-control" id="email" [value]="userData.email" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label floating-label">Phone</label>
+                <input type="text" class="form-control" id="phone" [value]="userData.phone" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="birthday" class="form-label floating-label">Birthday</label>
+                <input type="date" class="form-control" id="birthday" [value]="userData.birthday | date: 'dd-MM-yyyy'"
+                  readonly>
+              </div>
+              <div class="mb-3">
+                <label for="currentPassword" class="form-label floating-label">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword" [(ngModel)]="currentPassword"
+                  name="currentPassword">
+              </div>
+              <div class="mb-3">
+                <label for="newPassword" class="form-label floating-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword"
+                  name="newPassword">
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label floating-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword"
+                  name="confirmPassword" [ngClass]="{'password-mismatch': !checkPasswordsMatch()}">
+              </div>
+              <div class="btn-block">
+                <button type="button" class="btn btn__save" (click)="saveData()">Save</button>
+                <button type="button" class="btn btn__cancel" (click)="cancel()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

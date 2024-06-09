@@ -1,0 +1,161 @@
+.header {
+  &-false {
+    position: relative;
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../assets/picture/8.jpg");
+  }
+  &-overlay {
+    position: absolute;
+    background-color: #000000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.2;
+  }
+  &-true {
+    position: relative;
+    min-height: 20vh;
+    background-position: top;
+    background-image: url("../../assets/picture/8.jpg");
+  }
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: transparent;
+  &__block {
+    justify-content: center;
+    padding: 10px;
+  }
+  &__dropdown {
+    padding: 0px;
+  }
+  &__link,
+  &-dropdown__title {
+    font-size: 19px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  &__item {
+    padding: 0px 7px !important;
+  }
+}
+.restaurant__name {
+  color: white;
+  font-family: "Segoe Print", sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  padding: 3px 1px 9px 12px;
+}
+.response {
+  background-color: white;
+  min-height: 50vh;
+  box-shadow: 0 10px 14.7px rgba(0, 0, 0, 0.25), 0 -5px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d8d8d8;
+  margin: 50px 0px;
+  &-row {
+    min-height: 100vh;
+  }
+  &-container {
+    display: flex;
+    justify-content: center;
+  }
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 40px 80px 25px;
+  }
+  &__info {
+    padding: 20px 80px 25px;
+  }
+}
+.request {
+  background-color: white;
+  min-height: 60vh;
+  width: 80%;
+  padding: 30px 80px;
+  box-shadow: 0 10px 14.7px rgba(0, 0, 0, 0.25), 0 -5px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d8d8d8;
+  margin: 50px 0px;
+  &__title {
+    font-family: "Roboto Serif", serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 40px;
+    padding-bottom: 30px;
+  }
+  &__info {
+    display: block;
+    color: #5c5c5c;
+    margin-bottom: 2rem;
+  }
+  &-col {
+    display: flex;
+    justify-content: center;
+  }
+}
+.form {
+  &-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &-label {
+    margin-right: 7px;
+  }
+  &-number {
+    margin-right: 55%;
+    width: 10%;
+  }
+}
+.control {
+  width: 30%;
+  margin-right: 50%;
+}
+strong {
+  display: block;
+  margin-bottom: 25px;
+  font-family: "Roboto Serif", serif;
+  font-weight: 500;
+}
+.details__title {
+  margin-top: 40px;
+}
+textarea {
+  width: 50%;
+}
+.btn {
+  border: 1px solid black;
+  padding: 10px 30px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+.dining {
+  &__title {
+    position: absolute;
+    left: 42%;
+    top: 35%;
+    font-size: 40px;
+    font-weight: 600;
+    color: white;
+    font-family: "Roboto Serif", serif;
+  }
+  &__description {
+    color: white;
+    font-family: "Segoe Print", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    left: 44.6%;
+    top: 45%;
+  }
+}

@@ -1,0 +1,154 @@
+<div [ngClass]="postData ? 'header-true' : 'header-false'">
+  <div class="header-overlay"></div>
+  <h1 *ngIf="!postData" class="dining__title">Group Dining</h1>
+  <h2 *ngIf="!postData" class="dining__description">at Tasty Nook</h2>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div appNavbar class="navbar__block collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar__list navbar-nav">
+          <li class="navbar__item nav-item">
+            <a routerLink="/home" class="navbar__link nav-link" aria-current="page">Home</a>
+          </li>
+          <li class="navbar__item nav-item">
+            <a routerLink="/menu" class="navbar__link nav-link">Eat & Drink</a>
+          </li>
+          <li class="navbar__dropdown nav-item dropdown">
+            <a class="navbar-dropdown__title nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Reservation
+            </a>
+            <ul class="navbar-dropdown__list dropdown-menu">
+              <li class="navbar-dropdown__item"><a class="navbar-dropdown__link dropdown-item"
+                  routerLink="/group_dining">Group dining</a></li>
+              <li class="navbar-dropdown__item"><a class="navbar-dropdown__link dropdown-item"
+                  routerLink="/reservation">Make a reservation</a></li>
+            </ul>
+          </li>
+          <a routerLink="/home" class="restaurant__name navbar-brand">Tasty Nook</a>
+          <li *ngIf="authService.isLoggedIn" class="navbar__item nav-item">
+            <a routerLink="/cart" class="navbar__link nav-link">Cart</a>
+          </li>
+          <li class="navbar__item nav-item">
+            <a routerLink="/contact_us" class="navbar__link nav-link">Contact us</a>
+          </li>
+          <li *ngIf="!authService.isLoggedIn" class="navbar__item nav-item">
+            <a routerLink="/sign_up" class="navbar__link nav-link">Sign up</a>
+          </li>
+          <li *ngIf="authService.isLoggedIn" class="navbar__item nav-item">
+            <a class="navbar__link nav-link" data-bs-toggle="offcanvas" href="#offcanvasAccount" role="button"
+              aria-controls="offcanvasAccount">
+              My account
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div *ngIf="!postData" class="container">
+  <div class="row">
+    <div class="request-col col-12">
+      <div class="request">
+        <h3 class="request__title">Event Request</h3>
+        <hr>
+        <span class="request__info">To enter an Event Request, please fill out the following form.</span>
+        <form class="form" [formGroup]="diningForm" (ngSubmit)="onSubmit(diningForm)">
+          <div class="request-information">
+            <strong class="information__title">Your Contact Information</strong>
+            <div class="form-block mb-3">
+              <label for="fullname" class="form-label">Full Name</label>
+              <input type="text" class="control form-control" id="fullname" formControlName="fullName"
+                (blur)="onValueChanges()"
+                [ngClass]="{'is-invalid': fullName.invalid && (fullName.dirty || fullName.touched), 'is-valid': fullName.valid}">
+              <div class="invalid-feedback" *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+                {{formError['fullName']}}</div>
+            </div>
+            <div class="form-block mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="control form-control" id="email" formControlName="email"
+                (blur)="onValueChanges()"
+                [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched), 'is-valid': email.valid}">
+              <div class="invalid-feedback" *ngIf="email.invalid && (email.touched || email.dirty)">
+                {{formError['email']}}</div>
+            </div>
+            <div class="form-block mb-3">
+              <label for="phone" class="form-label">Phone number</label>
+              <input type="text" class="control form-control" id="phone" formControlName="phone"
+                (blur)="onValueChanges()"
+                [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched), 'is-valid': phone.valid}">
+              <div class="invalid-feedback" *ngIf="phone.invalid && (phone.touched || phone.dirty)">
+                {{formError['phone']}}</div>
+            </div>
+          </div>
+          <div class="request-details">
+            <strong class="details__title">Your Event Details</strong>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Nature of this Event (e.g., Birthday Party,
+                Business Dinner)</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-block mb-3">
+              <label for="date" class="form-label">Event Date</label>
+              <input type="date" class="control form-control" id="date" formControlName="date" [min]="minDate"
+                (blur)="onValueChanges()"
+                [ngClass]="{'is-invalid': date.invalid && (date.dirty || date.touched), 'is-valid': date.valid}">
+              <div class="invalid-feedback" *ngIf="date.invalid && (date.touched || date.dirty)">{{formError['date']}}
+              </div>
+            </div>
+            <div class="form-block mb-3">
+              <label for="time" class="form-label">Start Time</label>
+              <input type="time" class="control form-control" id="time" formControlName="startTime"
+                (blur)="onValueChanges()"
+                [ngClass]="{'is-invalid': startTime.invalid && (startTime.dirty || startTime.touched), 'is-valid': startTime.valid}">
+              <div class="invalid-feedback" *ngIf="startTime.invalid && (startTime.touched || startTime.dirty)">
+                {{formError['startTime']}}</div>
+            </div>
+            <div class="form-block mb-3">
+              <label for="time" class="form-label">End Time</label>
+              <input type="time" class="control form-control" id="time" formControlName="endTime"
+                (blur)="onValueChanges()"
+                [ngClass]="{'is-invalid': endTime.invalid && (endTime.dirty || endTime.touched), 'is-valid': endTime.valid}">
+              <div class="invalid-feedback" *ngIf="endTime.invalid && (endTime.touched || endTime.dirty)">
+                {{formError['endTime']}}</div>
+            </div>
+            <div class="form-block mb-3">
+              <label for="people" class="form-label">Number of People (Minimum of 15)</label>
+              <input type="number" class="form-number form-control" id="people" formControlName="people"
+                (blur)="onValueChanges()"
+                [ngClass]="{'is-invalid': people.invalid && (people.dirty || people.touched), 'is-valid': people.valid}">
+              <div class="invalid-feedback" *ngIf="people.invalid && (people.touched || people.dirty)">
+                {{formError['people']}}</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea2" class="form-label">Is there any additional information you would
+                like to add?</label>
+              <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+            </div>
+            <div class="btn-block">
+              <button class="btn" type="submit" [disabled]="diningForm.invalid">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="postData" class="response-container container">
+  <div class="response-row row">
+    <div class="col-12">
+      <div class="response">
+        <h3 class="response__title">Request Received!</h3>
+        <hr>
+        <p class="response__info">Thank you for your interest in Tasty Nook ! We've recorded your request and we will
+          get back to you shortly!</p>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

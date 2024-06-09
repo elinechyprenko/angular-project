@@ -1,0 +1,68 @@
+<div class="page-block">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+          <h3 class="form__title">Create an Account</h3>
+          <div class="form-email__block mb-3">
+            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@example.com"
+              (blur)="onValueChanges()"
+              [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched), 'is-valid': email.valid}">
+            <div class="invalid-feedback" *ngIf="email.invalid && (email.touched || email.dirty)">{{formError['email']}}
+            </div>
+            <div class="invalid-feedback" *ngIf="userForm.get('email')?.hasError('emailExist')">This email already
+              exists.</div>
+          </div>
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="fullname" formControlName="fullName" (blur)="onValueChanges()"
+              [ngClass]="{'is-invalid': fullName.invalid && (fullName.dirty || fullName.touched), 'is-valid': fullName.valid}">
+            <div class="invalid-feedback" *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+              {{formError['fullName']}}</div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Mobile Phone <span class="text-danger">*</span></label>
+            <input type="tel" class="form-control" id="phone" formControlName="phone" (blur)="onValueChanges()"
+              [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched), 'is-valid': phone.valid}">
+            <div class="invalid-feedback" *ngIf="phone.invalid && (phone.touched || phone.dirty)">{{formError['phone']}}</div>
+            <div class="invalid-feedback" *ngIf="userForm.get('phone')?.hasError('phoneExist')">This phone already exists.</div>
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Birthday <span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="date" formControlName="birthday" (blur)="onValueChanges()"
+              [ngClass]="{'is-invalid': birthday.invalid && (birthday.dirty || birthday.touched), 'is-valid': birthday.valid}">
+            <div class="invalid-feedback" *ngIf="birthday.invalid && (birthday.touched || birthday.dirty)">
+              {{formError['birthday']}}</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password" formControlName="password"
+              (blur)="onValueChanges()"
+              [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched), 'is-valid': password.valid}">
+            <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+              {{formError['password']}}</div>
+          </div>
+          <div class="mb-3">
+            <label for="confirm" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="confirm" formControlName="confirmPassword"
+              (blur)="onValueChanges()"
+              [ngClass]="{'is-invalid': confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched), 'is-valid': confirmPassword.valid}">
+            <div class="invalid-feedback"
+              *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+              {{formError['confirmPassword']}}</div>
+          </div>
+
+          <div class="btn-block mb-3">
+            <button class="btn btn__create" [disabled]="userForm.invalid">Create an account</button>
+          </div>
+          <div class="login-block mb-3">
+            <span class="login__question">Already have an account? <a class="login__link" routerLink="/login">Login here</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

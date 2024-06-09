@@ -1,0 +1,86 @@
+<div class="page-background">
+  <ng-container *ngIf="quantity > 0; then tableBlock; else elseBlock"></ng-container>
+</div>
+
+<ng-template #tableBlock>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="table-title">Product</th>
+        <th scope="col" class="table-title">Price</th>
+        <th scope="col" class="table-title">Quantity</th>
+        <th *ngIf="quantityAdditions > 0" scope="col" class="table-title">Additions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItem">
+        <td class="block-product">
+          <i class="gg-close-r" (click)="close(item.product)"></i>
+          <div class="block__image" *ngIf="imageUrl !== null && imageUrl.length > 0">
+            <img class="image" [src]="'http://localhost:3000/images/' + item.product.image" alt="">
+          </div>
+          <div class="block__info">
+            <span class="block__title">{{ item.product.title }}</span>
+            <span class="block__description">{{ item.product.description }}</span>
+          </div>
+        </td>
+        <td class="block-price">{{ item.price }} zl</td>
+        <td class="block__quantity-product">
+          <div class="product__quantity">
+            <i class="remove-product" (click)="removeProduct(item.product)"></i>
+            <span class="quantity">{{ item.quantityProduct }}</span>
+            <i class="add-product" (click)="addProduct(item.product)"></i>
+          </div>
+        </td>
+        <td *ngIf="quantityAdditions > 0">
+          <div *ngFor="let additionItem of item.addition" class="block-addition">
+            <div *ngIf="additionItem.quantityAddition > 0">
+              <span>{{ additionItem.addition_title }}</span>
+              <div class="additions__quantity-block">
+                <i class="remove-additions" (click)="removeAdditions(additionItem)"></i>
+                <span class="quantity">{{ additionItem.quantityAddition }}</span>
+                <i class="add-additions" (click)="addAddition(additionItem)"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="order-block">
+          <span class="order-title">Order: </span>
+          <div class="order__block">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="orderMethod" id="flexRadioDefault1"
+                value="on-site-ordering" (change)="onOrderMethodChange($event)"
+                [checked]="selectedOrderMethod === 'on-site-ordering'">
+              <label class="form-check-label" for="flexRadioDefault1">on-site ordering</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="orderMethod" id="flexRadioDefault2" value="takeaway"
+                (change)="onOrderMethodChange($event)" [checked]="selectedOrderMethod === 'takeaway'">
+              <label class="form-check-label" for="flexRadioDefault2">takeaway</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="orderMethod" id="flexRadioDefault3" value="delivery"
+                (change)="onOrderMethodChange($event)" [checked]="selectedOrderMethod === 'delivery'">
+              <label class="form-check-label" for="flexRadioDefault3">delivery</label>
+            </div>
+          </div>
+        </td>
+        <td class="subtotal-block"><span class="subtotal__title">Subtotal: </span><span class="subtotal__price">{{
+            allPrice }} zl</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="btn-block">
+    <a class="btn" type="button" (click)="proceedToCheckout()">Proceed to checkout</a>
+  </div>
+</ng-template>
+
+<ng-template #elseBlock>
+  <div class="empty-cart">
+    <img class="empty-cart__img" src="../../assets/picture/2232751.webp" alt="">
+    <span class="empty-cart__title">Looks like you haven't made your choice yet...</span>
+    <a class="empty-cart__btn" type="button" routerLink="/menu">View Menu</a>
+  </div>
+</ng-template>

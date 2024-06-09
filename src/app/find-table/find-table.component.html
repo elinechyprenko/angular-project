@@ -1,0 +1,10 @@
+<div>
+  <select class="select__people" name="people" id="selectPeople" [(ngModel)]="selectedPeople" required>
+    <option *ngFor="let person of peopleOptions" [ngValue]="person.value">{{person.label}}</option>
+  </select>
+  <input class="select__date" type="date" [min]="minDate" [max]="maxDate" [(ngModel)]="selectedDate" required>
+  <select class="select__time" name="time" id="selectTime" [(ngModel)]="selectedTime" required>
+    <option *ngFor="let time of hours" [ngValue]="time">{{time}}</option>
+  </select>
+  <button class="btn-find" [disabled]="!isFormValid()" (click)="findTable()">Find table</button>
+</div>

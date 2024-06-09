@@ -1,0 +1,207 @@
+.offcanvas {
+  z-index: 9999;
+  width: 50%;
+  &-header {
+    margin-top: 15px;
+  }
+  &-body {
+    padding-top: 0;
+  }
+  &-block {
+    height: 100vh;
+    border-right: 1px solid #b6b6b6;
+  }
+}
+.nav-link {
+  color: black;
+  &:hover {
+    color: black;
+  }
+  &.active {
+    color: black;
+    background-color: white;
+  }
+}
+.user {
+  &-block {
+    display: flex;
+    justify-content: center;
+  }
+  &__img {
+    width: 98px;
+    height: 97px;
+    border-radius: 60px;
+  }
+}
+.nav {
+  margin-top: 20px;
+  &-item {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+}
+hr {
+  margin: 0rem 0;
+}
+.info {
+  &-col {
+    padding-top: 30px;
+  }
+  &__title {
+    font-size: 18px;
+    font-family: "Roboto Serif", serif;
+    font-weight: 600;
+  }
+}
+
+.sign {
+  &-block {
+    margin-top: 50px;
+  }
+  &__out {
+    text-transform: uppercase;
+    padding: 10px 40px;
+    border: 1px solid #d0d0d0;
+    background-color: white;
+    font-weight: 500;
+    border-radius: 5px;
+  }
+}
+
+.mb-3 {
+  position: relative;
+  margin: 1.5rem 0px;
+}
+.form-control {
+  width: 100%;
+  padding: 1rem 0.75rem 1rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #d8d8d8;
+  border-radius: 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.floating-label {
+  position: absolute;
+  top: -0.6rem;
+  left: 0.75rem;
+  background-color: white;
+  padding: 0 0.25rem;
+  font-size: 0.75rem;
+  color: #666666;
+  transition: all 0.2s;
+  z-index: 2;
+  pointer-events: none;
+}
+.form-control:not(:placeholder-shown) + .floating-label,
+.form-control:focus + .floating-label {
+  top: -0.6rem;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  opacity: 1;
+}
+.tab-content {
+  margin-left: 10px;
+}
+.btn {
+  border: 1px solid #696969;
+  padding: 7px 30px;
+  font-weight: 500;
+  &-block {
+    display: flex;
+    justify-content: center;
+  }
+  &:first-child {
+    margin-right: 15px;
+  }
+}
+.password-mismatch {
+  border-color: red;
+}
+
+.gg {
+  &-calendar {
+    display: block;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    border: 2px solid;
+    border-top: 4px solid;
+    border-radius: 3px;
+    transform: scale(var(--ggs, 1));
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 2px;
+      width: 10px;
+      top: 2px;
+      left: 2px;
+      border-radius: 3px;
+      background: currentColor;
+    }
+  }
+  &-time {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    box-shadow: 0 0 0 2px currentColor;
+    &::after {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-left: 2px solid;
+      border-bottom: 2px solid;
+      top: 1px;
+      left: 5px;
+    }
+  }
+  &-user {
+    display: block;
+    transform: scale(var(--ggs, 1));
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    &::after,
+    &::before {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+      border: 2px solid;
+    }
+    &::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 30px;
+      top: 0;
+      left: 2px;
+    }
+    &::after {
+      width: 12px;
+      height: 9px;
+      border-bottom: 0;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      top: 9px;
+    }
+  }
+}
+#v-pills-reservation-tab {
+  padding-left: 5px;
+}
+th {
+  padding-right: 60px;
+}

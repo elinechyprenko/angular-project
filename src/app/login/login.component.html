@@ -1,0 +1,27 @@
+<div class="page-block">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+          <h3 class="form__title">Log in</h3>
+          <div class="register-block mb-3">
+            <span class="register__question">You do not have an account? <a class="register__link"
+                routerLink="/sign_up">Register</a></span>
+          </div>
+          <div class="form-email__block mb-3">
+            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+          </div>
+          <div class="btn-block mb-3">
+            <button class="btn btn__login" [disabled]="userForm.invalid">Log in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

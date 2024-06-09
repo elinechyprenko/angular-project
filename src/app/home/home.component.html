@@ -1,0 +1,218 @@
+<div class="header">
+  <div class="header-overlay"></div>
+  <div class="home-block">
+    <h1 class="home__title">Travel through flavors without leaving the house - Tasty Nook is in your kitchen!</h1>
+  </div>
+  <div id="carouselExampleIndicators" class="carousel slide carousel-fade">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../../assets/picture/1.png" class="carousel__img d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../../assets/picture/13.jpg" class="carousel__img d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../../assets/picture/3.jpg" class="carousel__img d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../../assets/picture/5.jpg" class="carousel__img d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../../assets/picture/14.jpg" class="carousel__img d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../../assets/picture/8.jpg" class="carousel__img d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div appNavbar class="navbar__block collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar__list navbar-nav">
+          <li class="navbar__item nav-item">
+            <a routerLink="/home" class="navbar__link nav-link" aria-current="page">Home</a>
+          </li>
+          <li class="navbar__item nav-item">
+            <a routerLink="/menu" class="navbar__link nav-link">Eat & Drink</a>
+          </li>
+          <li class="navbar__dropdown nav-item dropdown">
+            <a class="navbar-dropdown__title nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Reservation
+            </a>
+            <ul class="navbar-dropdown__list dropdown-menu">
+              <li class="navbar-dropdown__item"><a class="navbar-dropdown__link dropdown-item"
+                  routerLink="/group_dining">Group dining</a></li>
+              <li class="navbar-dropdown__item"><a class="navbar-dropdown__link dropdown-item"
+                  routerLink="/reservation">Make a reservation</a></li>
+            </ul>
+          </li>
+
+          <a routerLink="/home" class="restaurant__name navbar-brand">Tasty Nook</a>
+          <li *ngIf="authService.isLoggedIn" class="navbar__item nav-item">
+            <a routerLink="/cart" class="navbar__link nav-link">Cart</a>
+          </li>
+          <li class="navbar__item nav-item">
+            <a routerLink="/contact_us" class="navbar__link nav-link">Contact us</a>
+          </li>
+          <li *ngIf="!authService.isLoggedIn" class="navbar__item nav-item">
+            <a routerLink="/sign_up" class="navbar__link nav-link">Sign up</a>
+          </li>
+          <li *ngIf="authService.isLoggedIn" class="navbar__item nav-item">
+            <a class="navbar__link nav-link" data-bs-toggle="offcanvas" href="#offcanvasAccount" role="button"
+              aria-controls="offcanvasAccount">
+              My account
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="introduction__container container-fluid text-left">
+  <div class="introduction__row row align-items-start">
+    <div class="introduction__col-first col-6">
+      <h3 class="introduction__title">Welcome to Tasty Nook - your new gastronomic adventure!</h3>
+      <span class="introduction__history">
+        Here, in our cozy Tasty Nook, you will dive into a world of exquisite dishes and unique flavors. Our team of
+        talented chefs carefully selects ingredients to make each dish a true culinary work of art. <br>
+        Tasty Nook's cozy upscale-casual atmosphere with open kitchens, large horseshoe-shaped bars and outdoor patios
+        with fire pits creates the perfect ambiance for any occasion. Whether you want to enjoy a glass of cabernet and
+        ribeye with business colleagues dressed in suits, snack on a burger and beer at the bar in shorts and a t-shirt,
+        or sip sangria with friends around a hot fire on a summer evening, you're sure to fit right in.
+        What if you don't feel like leaving the comfort of your home? <br> Don't worry, we have a great option to order
+        our delicious food directly to you. So, are you ready to try our food at our place or would you prefer to enjoy
+        it in the comfort of your home?
+        Discover new gastronomic facets at Tasty Nook and give your palate a real treat!
+      </span>
+      <div class="introduction__btn-block">
+        <a class="introduction__btn introduction__btn-btn1" routerLink="/menu" role="button">Order now</a>
+        <a class="introduction__btn introduction__btn-btn2" routerLink="/menu" role="button">View menu</a>
+      </div>
+    </div>
+
+    <div class="introduction__col-second col-5">
+      <img class="introduction__image" src="../../assets/picture/4.jpg" alt="introduction">
+    </div>
+  </div>
+</div>
+
+<div class="image__container container-fluid text-left">
+  <div class="image__row row">
+    <div class="image__col image__col-first col-4">
+      <a routerLink="/menu">
+        <img class="image image__first" src="../../assets/picture/menu/2.3.jpg" alt="dish1">
+      </a>
+    </div>
+    <div class="image__col image__col-second col-4">
+      <a routerLink="/menu">
+        <img class="image" src="../../assets/picture/menu/3.1.jpg" alt="dish2">
+      </a>
+    </div>
+    <div class="image__col image__col-third col-4">
+      <a routerLink="/menu">
+        <img class="image" src="../../assets/picture/menu/4.1.jpg" alt="dish3">
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="promotional__container container-fluid text-left">
+  <div class="promotional__row promotional__row-first row">
+    <div class="promotional__col col-12">
+      <div class="promotional-image__first">
+        <div class="promotional-overlay promotional-overlay__first">
+          <span class="promotional__info">Do you want tonight to be memorable for a long time? Reserve a table in our
+            restaurant and enjoy the magic of taste that we create for you every day!</span>
+          <div class="promotional-block">
+            <a class="promotional__btn promotional__btn-second" routerLink="/reservation" role="button">Make a
+              reservation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="promotional__row promotional__row-second row">
+    <div class="promotional__col col-12">
+      <div class="promotional-image__second">
+        <div class="promotional-overlay promotional-overlay__second">
+          <h4 class="promotional__title">Host Your Event <br><span class="promotional__title-info">With Us</span></h4>
+          <span class="promotional__info">Our beautiful private dining rooms are ideal for any personal or business
+            occasion. We would love to help you plan your next business function, birthday party, bridal shower, baby
+            shower, rehearsal dinner and more. See the Group Dining page for more details.</span>
+          <div class="promotional-block">
+            <a class="promotional__btn promotional__btn-second" routerLink="/group_dining" role="button">Group
+              dining</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="history__container container-fluid text-left">
+  <div class="history__row row align-items-start">
+    <div class="history__col-first col-5">
+      <img class="history__image" src="../../assets/picture/6.1.jpg" alt="introduction">
+    </div>
+    <div class="history__col-second col-6">
+      <h3 class="history__title">History of Tasty Nook</h3>
+      <span class="history__info">
+        The story of Tasty Nook began with a young chef Emilia's dream of creating a unique place where every guest
+        could enjoy gourmet cuisine in a cozy environment. With determination and passion, she transformed a humble
+        establishment into a true culinary haven that drew foodies from all corners of the city.
+        From the early days, Tasty Nook became not just a restaurant, but a place where flavor and the warmth of
+        hospitality met. Magnificent dishes cooked with love and professionalism became a real revelation for visitors,
+        and the atmosphere of coziness and hospitality left no one indifferent.
+        Today "Tasty Nook" has become an integral part of the city's culture and image. Tasty memories of meetings with
+        friends and family are born here, and every visit brings new emotions and impressions. It is not just a
+        restaurant, it is a place where every guest feels at home, where he finds comfort and inspiration in every dish
+        and smile of the staff.
+      </span>
+      <p class="history-words__container"><span class="history__statement">“When I envision Tasty Nook, I see not just a
+          restaurant, but a place where every guest can forget the hustle and bustle and enjoy the flavor and warmth of
+          a true home.“</span>
+        <span class="history__words"> - said Emily before creating the restaurant.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="image__container container-fluid text-left">
+  <div class="image__row row">
+    <div class="image__col image__col-first col-4">
+      <a routerLink="/menu">
+        <img class="image image__first" src="../../assets/picture/menu/7.1.jpg" alt="dish1">
+      </a>
+    </div>
+    <div class="image__col image__col-second col-4">
+      <a routerLink="/menu">
+        <img class="image" src="../../assets/picture/menu/6.4.jpg" alt="dish2">
+      </a>
+    </div>
+    <div class="image__col image__col-third col-4">
+      <a routerLink="/menu">
+        <img class="image" src="../../assets/picture/menu/7.3.jpg" alt="dish3">
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-account></app-account>
+<router-outlet></router-outlet>

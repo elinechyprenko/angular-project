@@ -1,0 +1,64 @@
+<div class="booking-container container">
+    <div class="row">
+        <div class="booking-block">
+            <div class="col-4">
+                <img class="booking__image" src="../../assets/picture/menu/7.3.jpg" alt="">
+            </div>
+            <div class="booking__second col-4">
+                <div class="data-block">
+                    <i class="gg-calendar"></i>
+                    <span class="booking__info">{{date}}</span>
+                </div>
+                <div class="data-block">
+                    <i class="gg-time"></i>
+                    <span class="booking__info">{{time}}</span>
+                </div>
+                <div class="data-block">
+                    <i class="gg-user"></i>
+                    <span class="booking__info">{{people}}</span>
+                </div>
+                <div class="data-block">
+                    <i class="gg-user"></i>
+                    <span class="booking__info">{{fullName}}</span>
+                </div>
+                <div class="data-block">
+                    <i class="gg-mail"></i>
+                    <span class="booking__info">{{email}}</span>
+                </div>
+                <div class="data-block">
+                    <i class="gg-phone"></i>
+                    <span class="booking__info">{{phone}}</span>
+                </div>
+            </div>
+            <div class="booking__third col-4">
+                <button class="booking-cancel__btn" (click)="cancelReservation()"><i class="gg-close"></i> <span
+                        class="booking-cancel__title">Cancel</span></button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <div class="info-block">
+                <strong class="info__title">What to know before you go</strong>
+                <strong class="info__dining">Important dining information</strong>
+                <span>
+                    We may contact you about this reservation, so please ensure your email and phone number are up to
+                    date.</span>
+                <strong>You may cancel your reservation with at least 4 hours notice</strong>
+            </div>
+        </div>
+    </div>
+    <hr *ngIf="!authService.isLoggedIn">
+    <div class="row">
+        <div class="col-12" *ngIf="!authService.isLoggedIn">
+            <div class="account-block">
+                <span class="account__description">Create an account to easily revisit this reservation</span>
+                <a class="btn btn__create" routerLink="/sign_up">Create an account</a>
+            </div>
+        </div>
+        <div class="back-block" *ngIf="backtoCart">
+            <a class="btn back__btn" routerLink="/cart">Back to cart</a>
+        </div>
+    </div>
+</div>

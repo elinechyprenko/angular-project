@@ -1,0 +1,74 @@
+<div class="reservation-details conainer">
+  <div class="reservation-details__block row">
+    <div class="reservation-details__col col-6">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Full Name"
+            formControlName="fullName" (blur)="onValueChanges()"
+            [ngClass]="{'is-invalid': fullName.invalid && (fullName.dirty || fullName.touched), 'is-valid': fullName.valid}">
+          <div class="invalid-feedback" *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+            {{formError['fullName']}}</div>
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email"
+            formControlName="email" (blur)="onValueChanges()"
+            [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched), 'is-valid': email.valid}">
+          <div class="invalid-feedback" *ngIf="email.invalid && (email.touched || email.dirty)">{{formError['email']}}
+          </div>
+        </div>
+        <div class="mb-3">
+          <input type="tel" class="form-control" id="exampleFormControlInput1" placeholder="Phone"
+            formControlName="phone" (blur)="onValueChanges()"
+            [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched), 'is-valid': phone.valid}">
+          <div class="invalid-feedback" *ngIf="phone.invalid && (phone.touched || phone.dirty)">{{formError['phone']}}
+          </div>
+        </div>
+        <div class="mb-3">
+          <select class="form-select" aria-label="Default select example" formControlName="occasion">
+            <option value="" disabled hidden>Select an occasion (optional)</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Date">Date</option>
+            <option value="Special Occasion">Special Occasion</option>
+            <option value="Business Meal">Business Meal</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+            placeholder="Add a special request (optional)" formControlName="request"></textarea>
+        </div>
+        <div class="btn-block">
+          <button type="btn" class="btn-confirm" [disabled]="userForm.invalid">Confirm a reservation</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-5">
+      <p class="restaurant-brand">Tasty Nook</p>
+      <div>
+        <div class="reservation-info">
+          <i class="gg-calendar"></i>
+          <span class="reservation-info__table">{{date}}</span>
+        </div>
+        <div class="reservation-info">
+          <i class="gg-time"></i>
+          <span class="reservation-info__table">{{time}}</span>
+        </div>
+        <div class="reservation-info">
+          <i class="gg-user"></i>
+          <span class="reservation-info__table">{{people}}</span>
+        </div>
+        <div class="reservation-info">
+          <i class="gg-pin"></i>
+          <span class="reservation-info__table">227 S. 18th St.</span>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <span class="reservation-details__title">What to know before you go</span>
+        <span class="reservation-details__advice">Important dining information.
+          We may contact you about this reservation, so please ensure your email and phone number are up to date.</span>
+        <span class="reservation-details__advice cancel">You may cancel your reservation with at least 4 hours
+          notice</span>
+      </div>
+    </div>
+  </div>
+</div>
