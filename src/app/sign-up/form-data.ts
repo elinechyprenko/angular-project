@@ -27,7 +27,7 @@ export const VALIDATION_MESSAGE: { [key: string]: { [key: string]: string } } = 
   },
   password: {
     required: 'Required field',
-    passwordValidator: 'Incorrect password format'
+    passwordValidator: 'Password must be 9-30 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
   },
   confirmPassword: {
     required: 'Required field',

@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Login } from './login.class';
 import { AuthService } from '../services/auth.service';
@@ -39,17 +39,24 @@ export class LoginComponent {
     this.loginForm = form.value;
     this.http.post('http://localhost:3000/login', this.loginForm).subscribe(
       (res: any) => {
-        localStorage.setItem('userData', JSON.stringify(res.userData));
-        // console.log(res.userData)
-        if (localStorage.getItem('userData')) {
-          this.authService.isLoggedIn = true;
-          console.log(this.authService.isLoggedIn);
-        }
+        if (res.success === true) {
+          localStorage.setItem('userData', JSON.stringify(res.userData));
+          if (localStorage.getItem('userData')) {
+            this.authService.isLoggedIn = true;
+            console.log(this.authService.isLoggedIn);
+          }
 
-        if (this.authService.redirectUrl) {
-          this.router.navigate([this.authService.redirectUrl]);
-        } else {
-          this.router.navigate(['/home']);
+          if (this.authService.redirectUrl) {
+            this.router.navigate([this.authService.redirectUrl]);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        }
+        else if (res.success === false && res.message === 'Incorrect password') {
+          alert('Incorrect password')
+        }
+        else if (res.success === false && res.message === 'User not found') {
+          alert('User not found')
         }
       },
       (error) => {

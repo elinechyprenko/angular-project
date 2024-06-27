@@ -27,7 +27,4 @@ export class GetDataService {
   checkPhoneExists(phone: string): Observable<boolean> {
     return this.http.get<boolean>(`http://localhost:3000/user/phone?phone=${phone}`);
   }
-  getCoupons(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/coupons');
-  }
 }

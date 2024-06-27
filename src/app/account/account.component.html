@@ -1,4 +1,4 @@
-<div *ngIf="authService.isLoggedIn" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAccount"
+<div *ngIf="authService.isLoggedIn" class="offcanvas offcanvas-end"  id="offcanvasAccount"
   aria-labelledby="offcanvasAccountLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasAccountLabel">Profile</h5>
@@ -138,7 +138,7 @@
                     <td>{{data.phone}}</td>
                     <td>{{data.address}}</td>
                     <td>{{data.postcode}}</td>
-                    <td>{{order.date | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{data.date | date: 'dd-MM-yyyy'}}</td>
                     <td>{{data.time}}</td>
                     <td>{{data.total_price}} zl</td>
                     <td>{{data.selected_payment}}</td>
